@@ -1,0 +1,71 @@
+---
+title: "Working with factors (version 0.1)"
+author: "Christopher Brown"
+date: "January 29, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Libraries and data acquisition  
+
+```{r libraries, message = F, warning = F}
+library(tidyverse) # suggested library for this challenge, but many of these problems can be solved without it
+# include other libraries used in your solutions here
+```
+
+```{r data_import}
+# Load data if desired - one option is https://www.gapminder.org/data/
+# Otherwise use mtcars, a built-in dataset
+```
+
+# II. Problems  
+
+Using the built-in dataset mtcars (or a dataset of your choosing which has data conducive to working with factors, e.g., character strings or categorical variables):  
+
+1. Check whether a vector or columnn is a factor
+2. Create a factor
+3. Check the factor levels. What do the levels represent?
+4. Order factor levels by another variable
+5. Order factor levels by first appearance of each label (label refers to the actual value rather than the level)
+6. Move the last two factor levels to the beginning
+7. Collapse the `make` values that appear once into an `other` category. Optionally, set your own threshold for `other`.
+8. Create a new factor column using the distinct values in `make` and another column with categorical values, such as `cyl`.
+9. Sort the dataframe by factor levels
+10. Filter the data to remove observations of `fiat`, then drop any unused factor levels. What could happen if this isn't done?
+11. Recode or relabel the factor values. For example, you might invert, capitalize, or trim the labels in some way.
+12. Using `ggplot`, make two bar charts and compare the results when using `make` as a character vector vs a factor. How does the ordering of bars change with each approach?
+13. Using `make` as a charcter vector within a dataframe, coerce `make` to a factor and order it appropriately only within a `ggplot` function call.
+
+Other suggested challenges:
+14. Within a faceted ggplot, appropriately order factor levels by a continuous variable.
+15. Using a grouped dataframe with factor levels, create a ggplot. What are possible issues that can arise?
+
+# III. Possible solutions  
+
+In this section, try to solve one or more of these problems. There are likely to be multiple solutions. Why might one approach be preferred over another?
+
+```{r solution1}
+# You may want to create additional code chunks for various problems, especially those involving plotting.
+
+## Hint for getting started with mtcars: 
+# Create a new column 'make' using mtcars
+df <- mtcars %>% 
+  mutate(make = str_extract(rownames(.), pattern = "^\\w+"))
+```
+
+```{r ggplot_example}
+# This is just a brief refresher on ggplot syntax. Note that this is a flawed plot. Why?
+ggplot(df, aes(x = make, y = mpg)) + 
+  geom_col() + # consider using geom_bar(), depending on the intended result
+  coord_flip()
+```
+
+
+# IV. Feedback  
+
+1. What additional questions do you have about factors, or factor related topics would you like to see addressed?
+2. What functions or resources did you use that were most beneficial in solving these problems?
+3. Do you have an interesting example or approach that you'd like to share?
